@@ -17,10 +17,14 @@ def emotion_detector(text_to_analyse):
     emotions = formatted_response['emotionPredictions'][0]['emotion']
     dominant_emotion = max(emotions, key=emotions.get)
     
-    return {'anger': anger_score,
+    if response.status_code == 200:
+        return {'anger': anger_score,
         'disgust': disgust_score,
         'fear': fear_score,
         'joy': joy_score,
         'sadness': sadness_score,
         'dominant_emotion': dominant_emotion
-    }
+        }
+    elif response.status_code == 500:
+        return None
+    
