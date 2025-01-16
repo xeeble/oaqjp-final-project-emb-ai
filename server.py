@@ -1,3 +1,9 @@
+'''
+Executing this function initiates the application of emotion
+detection to be executed over the Flask channel and deployed on
+localhost:5000.
+'''
+
 from flask import Flask, request, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -16,8 +22,13 @@ def sent_analyzer():
     if response['dominant_emotion'] is None:
         return "Invalid text! Please try again!."
 
-    formatted_response = ("'anger': {}, 'disgust': {}, 'fear': {}, 'joy': {} and 'sadness': {}. The dominant emotion is {}.")
-    formatted_response = formatted_response.format(response['anger'],response['disgust'],response['fear'],response['joy'],response['sadness'],response['dominant_emotion'])
+    formatted_response = ("'anger': {}, 'disgust': {},"
+    " 'fear': {}, 'joy': {} and 'sadness': {}."
+    "  The dominant emotion is {}.")
+    formatted_response = formatted_response.format(response['anger'],
+    response['disgust'],response['fear'],
+    response['joy'],response['sadness'],
+    response['dominant_emotion'])
     return formatted_response
 
 
